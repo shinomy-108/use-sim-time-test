@@ -1,0 +1,19 @@
+extends: default
+
+rules:
+  braces:
+    level: error
+    max-spaces-inside: 1 # Prettierでフォーマットするため
+  comments:
+    level: error
+    min-spaces-from-content: 1 # C++やPythonと互換性を持たせるため
+  document-start:
+    level: error
+    present: false # ドキュメント開始マーカーは不要
+  line-length: disable # Prettierに委任
+  truthy:
+    level: error
+    check-keys: false # GitHub Actionsの'on'を許可するため
+  quoted-strings:
+    level: error
+    required: false # 一貫したスタイルを保つため

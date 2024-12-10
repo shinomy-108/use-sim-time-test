@@ -1,0 +1,66 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-xml # XMLファイルの構文チェック
+      - id: check-toml # TOMLファイルの構文チェック
+      - id: check-yaml # YAMLファイルの構文チェック
+        args: [--unsafe] # 安全でないチェックを有効にする
+      - id: detect-private-key # プライベートキーの検出
+      - id: check-json # JSONファイルの構文チェック
+      - id: check-merge-conflict # マージコンフリクトの検出
+      - id: end-of-file-fixer # ファイルの末尾に改行を追加
+      - id: trailing-whitespace # 行末の空白を削除
+        args: [--markdown-linebreak-ext=md] # Markdownファイルの行末改行を許可
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.42.0
+    hooks:
+      - id: markdownlint # Markdownファイルのスタイルチェック
+        args: [-c, .markdownlint.yaml, --fix] # 設定ファイルを指定し、自動修正を有効にする
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier # コードフォーマッタPrettierの実行
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint # YAMLファイルのスタイルチェック
+
+  - repo: https://github.com/tier4/pre-commit-hooks-ros
+    rev: v0.10.0
+    hooks:
+      - id: flake8-ros # ROS用のFlake8チェック
+        args: [--config=.flake8] # 設定ファイルを指定
+      - id: prettier-xacro # Xacroファイルのフォーマット
+      - id: prettier-launch-xml # Launch XMLファイルのフォーマット
+      - id: prettier-package-xml # Package XMLファイルのフォーマット
+      - id: ros-include-guard # ROSのインクルードガードチェック
+      - id: sort-package-xml # Package XMLファイルのソート
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort # Pythonのインポートソート
+        args: [--profile=black, --line-length=100] # Blackのプロファイルを使用
+
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black # PythonコードフォーマッタBlackの実行
+        args: [--line-length=100] # 行の長さを100文字に設定
+
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v18.1.8
+    hooks:
+      - id: clang-format # C++、C、CUDAファイルのフォーマット
+        types_or: [c++, c, cuda]
+        args: [--style=file] # .clang-formatファイルを使用
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.29.2
+    hooks:
+      - id: check-metaschema # JSONスキーマのチェック
+        files: ^.+/schema/.*schema\.json$ # スキーマファイルのパスを指定
